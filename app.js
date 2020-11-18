@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const Person = require('./models/person');
-
-mongoose.connect('mongodb://localhost:27017/immortal', {
+// localhost 'mongodb://localhost:27017/immortal'
+mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
