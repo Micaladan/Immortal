@@ -70,7 +70,8 @@ app.delete('/people/:id/', async (req, res) => {
   res.redirect('/people');
 });
 
-app.listen(3000, () => {
+const port_number = process.env.port || 3000;
+app.listen(port_number, () => {
   console.log('Serving on port 3000');
 });
 
