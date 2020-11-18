@@ -5,8 +5,8 @@
         <div class="col-6 offset-3">
             <form action="/people/<%= person._id %>?_method=PUT" method="POST">
                 <div>
-                    <label class="form-label mb-3" for="title">Title</label>
-                    <input class="form-control" type="text" id="title" name="person[title]" value="<%= person.title %>"> 
+                    <label class="form-label mb-3" for="name">Name</label>
+                    <input class="form-control" type="text" id="name" name="person[name]" value="<%= person.name %>"> 
                 </div>
                 <div>
                     <label class="form-label mb-3" for="location">Location</label>
