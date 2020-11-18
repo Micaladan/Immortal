@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const Person = require('./models/person');
+const cors = require('cors');
+require('dotenv/config');
 // localhost 'mongodb://localhost:27017/immortal'
 mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
@@ -25,6 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.render('home');
