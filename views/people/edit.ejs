@@ -5,21 +5,21 @@
         <div class="col-6 offset-3">
             <form action="/people/<%= person._id %>?_method=PUT" method="POST">
                 <div>
-                    <label class="form-label mb-3" for="name">Name</label>
-                    <input class="form-control" type="text" id="name" name="person[name]" value="<%= person.name %>"> 
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control mb-3" type="text" id="name" name="person[name]" value="<%= person.name %>"> 
                 </div>
                 <div>
-                    <label class="form-label mb-3" for="location">Location</label>
-                    <input class="form-control" type="text" id="location" name="person[location]" value="<%= person.location %>"> 
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control mb-3" type="text" id="location" name="person[location]" value="<%= person.location %>"> 
                 </div>
                 <div>
-                    <label class="form-label mb-3" for="image">Image URL</label>
-                    <input class="form-control" type="text" id="image" name="person[image]" value="<%= person.image %>"> 
+                    <label class="form-label" for="image">Image URL</label>
+                    <input class="form-control mb-3" type="text" id="image" name="person[image]" value="<%= person.image %>"> 
                 </div>
                
                 <div>
-                    <label class="form-label mb-3" for="description">Description</label>
-                    <textarea class="form-control" type="text" id="description" name="person[description]"><%= person.description %></textarea> 
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control mb-3" type="text" id="description" name="person[description]"><%= person.description %></textarea> 
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-info">Update Person</button>
