@@ -1,9 +1,5 @@
 <% layout("layouts/boilerplate")%>
-    <h1>All People</h1>
-    <div>
-        <a href="/people/new">Add a New Person</a>
-    </div>
-   
+    <h1>All People</h1>   
         <% for(let person of people) {%>
             <div class="card" mb-3>
                 <div class="row">
@@ -20,6 +16,5 @@
                     </div>
                 </div>
             </div>
-            <li> <a href="/people/<%= person._id %>"><%= person.name %></a>  </li>
         <% }%>
     </ul>
