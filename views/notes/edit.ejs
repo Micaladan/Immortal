@@ -1,0 +1,25 @@
+<% layout("layouts/boilerplate")%>
+
+    <div class="row">
+        <h1 class="text-center">Edit Note</h1>
+        <div class="col-6 offset-3">
+            <form action="/notes/<%= note._id %>?_method=PUT" method="POST">
+                <div>
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control mb-3" type="text" id="title" name="note[title]" value="<%= note.title %>"> 
+                </div>
+                <div>
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control mb-3" type="text" id="description" name="note[description]"><%= note.description %></textarea> 
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Note</button>
+                </div>
+              
+            </form>
+            <div>
+            <a href="/notes/<%= note._id %>">Back to Note</a>
+            </div>
+        
+        </div>
+    </div>
