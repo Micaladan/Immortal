@@ -1,0 +1,39 @@
+<% layout("layouts/boilerplate")%>
+
+    <div class="row">
+        <h1 class="text-center">Edit Investigation</h1>
+        <div class="col-6 offset-3">
+            <form action="/investigations/<%= investigation._id %>?_method=PUT" method="POST">
+                <div>
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control mb-3" type="text" id="title" name="investigation[title]" value="<%= investigation.title %>"> 
+                </div>
+                <div>
+                    <label class="form-label" for="contacts">Contacts</label>
+                    <input class="form-control mb-3" type="text" id="contacts" name="investigation[contacts]" value="<%= investigation.contacts %>"> 
+                </div>
+                <div>
+                    <label class="form-label" for="status">Status</label>
+                    <p>Investigation Status</p>
+                    <select class="form-control" name="investigation[status]" id="status">
+                        <option value="Open">Open</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                </div>
+                               
+
+                <div>
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control mb-3" type="text" id="description" name="investigation[description]"><%= investigation.description %></textarea> 
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Investigation</button>
+                </div>
+              
+            </form>
+            <div>
+            <a href="/investigations/<%= investigation._id %>">Back to Investigation</a>
+            </div>
+        
+        </div>
+    </div>

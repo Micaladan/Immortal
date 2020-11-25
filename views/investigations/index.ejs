@@ -1,0 +1,25 @@
+<% layout("layouts/boilerplate")%>
+<div>
+    <a class="btn btn-success" style="float: right;" href="/investigations/new">Add a New Investigation</a>
+</div>
+  
+<h1>All Investigations</h1>
+        <% for(let investigation of investigations) {%>
+            <div class="card" mb-3>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="card-body col-md-8">
+                        <h5 class="card-title"><%= investigation.title %></h5>
+                        <p class="card-text"><%= investigation.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= investigation.contacts %></small>
+                                </p>
+                                <p> <small class="text-muted"><%= investigation.status %></small></p>
+                        <a href="/investigations/<%= investigation._id %>" class="btn btn-primary">View <%= investigation.title %></a>
+                    </div>
+                </div>
+            </div>
+
+        <% }%>
+    </ul>

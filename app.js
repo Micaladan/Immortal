@@ -5,6 +5,7 @@ const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const Person = require('./models/person');
 const Note = require('./models/note');
+const Investigation = require('./models/investigation');
 const cors = require('cors');
 require('dotenv/config');
 // localhost 'mongodb://localhost:27017/immortal'
@@ -12,6 +13,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 const db = mongoose.connection;
@@ -46,6 +48,11 @@ app.get('/notes', async (req, res) => {
   res.render('notes/index', { notes });
 });
 
+//Get index Route for Investigations
+app.get('/investigations', async (req, res) => {
+  const investigations = await Investigation.find({});
+  res.render('investigations/index', { investigations });
+});
 // Get new Person form
 app.get('/people/new', (req, res) => {
   res.render('people/new');
@@ -54,6 +61,11 @@ app.get('/people/new', (req, res) => {
 // Get new Note form
 app.get('/notes/new', (req, res) => {
   res.render('notes/new');
+});
+
+// Get new Investigation form
+app.get('/investigations/new', (req, res) => {
+  res.render('investigations/new');
 });
 
 // Post people
@@ -69,6 +81,12 @@ app.post('/notes', async (req, res) => {
   await note.save();
   res.redirect(`/notes/${note._id}`);
 });
+//Post Investigations
+app.post('/investigations', async (req, res) => {
+  const investigation = new Investigation(req.body.investigation);
+  await investigation.save();
+  res.redirect(`/investigations/${investigation._id}`);
+});
 // Get person by id
 app.get('/people/:id', async (req, res) => {
   const person = await Person.findById(req.params.id);
@@ -81,6 +99,11 @@ app.get('/notes/:id', async (req, res) => {
   res.render('notes/show', { note });
 });
 
+//Get investigation by id
+app.get('/investigations/:id', async (req, res) => {
+  const investigation = await Investigation.findById(req.params.id);
+  res.render('investigations/show', { investigation });
+});
 //Get Person by id and show edit form
 app.get('/people/:id/edit', async (req, res) => {
   const person = await Person.findById(req.params.id);
@@ -92,6 +115,12 @@ app.get('/notes/:id/edit', async (req, res) => {
   const note = await Note.findById(req.params.id);
   res.render('notes/edit', { note });
 });
+//Get investigation by id and show edit form
+app.get('/investigations/:id/edit', async (req, res) => {
+  const investigation = await Investigation.findById(req.params.id);
+  res.render('investigations/edit', { investigation });
+});
+
 // update person id
 app.put('/people/:id', async (req, res) => {
   const { id } = req.params;
@@ -109,6 +138,15 @@ app.put('/notes/:id', async (req, res) => {
   });
   res.redirect(`/notes/${note._id}`);
 });
+
+//update investigation id
+app.put('/investigations/:id', async (req, res) => {
+  const { id } = req.params;
+  const investigation = await Investigation.findByIdAndUpdate(id, {
+    ...req.body.investigation,
+  });
+  res.redirect(`/investigations/${investigation._id}`);
+});
 //delete person id
 app.delete('/people/:id/', async (req, res) => {
   const { id } = req.params;
@@ -121,7 +159,12 @@ app.delete('/notes/:id/', async (req, res) => {
   await Note.findByIdAndDelete(id);
   res.redirect('/notes');
 });
-//
+//delete investigation id
+app.delete('/investigations/:id/', async (req, res) => {
+  const { id } = req.params;
+  await Investigation.findByIdAndDelete(id);
+  res.redirect('/investigations');
+});
 
 app.listen(process.env.PORT || 3000, function () {
   console.log(
@@ -131,18 +174,18 @@ app.listen(process.env.PORT || 3000, function () {
   );
 });
 
-//seed database
-//
+// seed database
+
 // const seedDB = async () => {
-//   await Person.deleteMany({});
+//   await Investigation.deleteMany({});
 //   for (let i = 0; i < 50; i++) {
-//     const peep = new Person({
-//       name: 'John Smith',
-//       image: 'https://randomuser.me/api/portraits/women/21.jpg',
-//       description: 'This is a person',
-//       location: 'loveland, ohio',
+//     const investigation = new Investigation({
+//       title: 'seed investigation',
+//       description: 'This is an investigation description',
+//       status: 'Open',
+//       contacts: 'seedy mcseederson',
 //     });
-//     await peep.save();
+//     await investigation.save();
 //   }
 // };
 // seedDB().then(() => {
