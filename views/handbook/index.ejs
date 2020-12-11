@@ -1,0 +1,280 @@
+<% layout("layouts/boilerplate")%>
+ <h1>Player's Handbook</h1> 
+
+   <div id="hacker-list"">
+    <form class="search search-form mb-3">
+      <div style="display: flex;">
+        <input type="text" style="flex: 1;" class="search form-control form-control-md" placeholder="Search Natures">
+        <button style="flex: 0;" class="btn btn-success sort" data-sort="name">Sort</button>
+      
+      </div>
+      </form>
+   
+      <ul class="list"></ul>
+    </div>
+<script>
+//natures
+var natures = [
+  {
+    name: `360 vision`,
+    description: `You ignore all penalties imposed on you
+    for attempting to perceive or fight
+    opponents/things behind or flanking you.
+    You can effectively see in all directions
+    at once.`,
+    tribe: `Arachne`,
+    activation: `Passive`,
+  },
+  {
+    name: `Absorb`,
+    description: `You absorb the essence of your species
+ into your body and can hold it there for
+    the duration of a scene. At the end of
+    the scene, the essence will automatically
+    flow out of your body naturally. The
+    amount you absorb can be no greater in
+    volume than your own body in himsati
+    form (A fire elemental the size of a
+    mouse cannot absorb a bonfire).
+    At any time during the scene, you can
+    disgorge the held material outwards with
+    explosive force. You use this as a
+    Throwing skill-based attack (AGL only
+    if you do not have Throwing Weapons).
+    The maximum range is your STR in
+    yards and it does damage points equal to
+    twice your SPT.
+    This nature is common for pure
+    elementals (fire elementals absorb fire,
+    and so forth) only. Other himsatis
+    absorb their species (a hawk himsati
+    absorbs birds for example).`,
+    tribe: `Not Terat`,
+    activation: `Activating this nature only makes it
+    ready to use, it requires a normal action
+    to bring the Nature’s effect into play.`,
+  },
+  {
+    name: `Aquatic`,
+    description: `You ignore all penalties caused by water
+    or being underwater. You are also
+    immune to deep-sea pressure up to your
+    END x1000 fathoms. 1 fathom equals 2
+    yards. You may swim at your full
+    movement rates, but this does not enable
+    you to breathe water. Additional levels
+    double the your swimming speed (Level
+    1 = Normal, Level 2 = 2x, Level 3 = 4x,
+    Level 4 = 8x, etc.)`,
+    tribe: `Protean (can withstand up to
+        END x 2000 fathoms instead of 1000
+        fathoms)`,
+    activation: `Passive`,
+  },
+  {
+    name: `Arboreal`,
+    description: `You move and fight through trees,
+    power lines, scaffolding, etc. at your full
+    movement rates by effectively swinging,
+    fast climbing, slight hops and acrobatic
+    tumbles as needed. Penalties still apply.
+    Additional levels double your speed
+    (Level 1 = Normal, Level 2 = 2x, Level
+    3 = 4x, Level 4 = 8x, etc.)`,
+    tribe: `Any`,
+    activation: `Passive`,
+  },
+  {
+    name: `Armor`,
+    description: `You gain a number of points of Armor
+equal to half your STR. This armor is
+intrinsic and applies against serenades
+
+and other mystic forms of damage that
+do not explicitly deny the use of the
+nature as protection.`,
+    tribe: `Peri`,
+    activation: `Passive`,
+  },
+  {
+    name: `Balance`,
+    description: `You ignore all penalties related to
+balance or poor footing, including those
+penalties created by mystical means.`,
+    tribe: `Any`,
+    activation: `Passive`,
+  },
+  {
+    name: `Beauty`,
+    description: `You gain a bonus equal to half your SPT
+for any social interactions that attempt to
+awe others due to incredible looks,
+animal magnetism, a continuous alluring
+scent, etc. When in full himsati, you
+may instead direct your beauty at a
+single target, forcing the target to roll his
+WIL against a target number equal to
+your PRS plus half your SPT. Failure
+indicates the target cannot bring himself
+to attack you, and will stand in awe of
+your presence. If you attempt to direct
+the power of the nature at multiple
+targets, the number of targets is
+subtracted from your PRS for
+determining their target number to resist.
+(IE -- Attempting to affect 3 targets
+subtracts 3 from your PRS). The effect
+lasts until the end of the scene, but can
+last longer if the Narrator deems it
+appropriate.`,
+    tribe: `Hemari Tuatha`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+  },
+  {
+    name: `Bioluminescence`,
+    description: `You ignore darkness penalties within a
+number of yards equal to your END.
+You create a vision penalty whenever
+desired (by using an action) equal to half
+
+your END, against everyone in hand-to-
+hand combat range (it cannot be applied
+
+selectively). The vision penalty will last
+until the end of the scene.`,
+    tribe: `Phoenix`,
+    activation: `Passive with activated ability`,
+  },
+  {
+    name: `Blood Drain`,
+    description: `You heal one box of damage for every
+two boxes of damage you cause an
+opponent. This must be done through
+some form of direct body contact such as
+skin-to-skin, biting with fangs, etc. The
+choice to use the nature must be made
+before any attack rolls are made.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+  },
+  {
+    name: `Blur`,
+    description: `You create a vision penalty equal to your
+AGL against characters attempting to hit
+you from range, and half your AGL
+against characters in hand-to-hand
+combat, due to vibrating at a high rate of
+speed, seeming to be in two places at
+once, blinking in and out of sight, etc.
+This effect will last until the end of the
+scene.`,
+    tribe: `Tuatha`,
+    activation: `Passive`,
+  },
+  {
+    name: `Body Compression`,
+    description: `You can compress your body into a
+space the size of an adult human fist.
+The shape adjusts to allow you to
+squeeze under doors, through keyholes,
+etc. Additionally, you ignore all
+penalties for fighting or maneuvering in
+close or cramped quarters. If your size
+grows beyond level 0, the size of the
+compressed body doubles for each level
+(Size 1 = two adult human fists, Size 2 =
+four adult human fists, Size 3 = eight
+adult human fists)`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+  },
+  {
+    name: `Breath`,
+    description: `You pick a liquid or gas (such as water
+or methane) that you can breathe in
+place of normal air when desired. You
+take no penalties or damage for
+breathing this substance. This can be
+purchased multiple times for multiple
+substances.`,
+    tribe: `Any`,
+    activation: `Passive`,
+  },
+  {
+    name: `Burrow`,
+    description: `You move underground through packed
+dirt at your full movement rate and
+through harder substances (stone and
+metal) at a slower pace according to
+Narrator’s discretion. You can choose to
+leave behind a tunnel corresponding to
+you size. Additionally you are able to
+carve out underground caverns at a rate
+of one comfortable room per day (based
+on your size). Additional levels double
+your speed (Level 1 = Normal, Level 2 =
+2x, Level 3 = 4x, Level 4 = 8x, etc.)`,
+    tribe: `Any`,
+    activation: `Passive`,
+  },
+  {
+    name: `Camouflage`,
+    description: `When moving at combat rate or slower
+you can create a bonus equal to half your
+SPT for all stealth rolls. If you stay still
+the bonus is equal to your full SPT.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+  },
+  {
+    name: `Charge`,
+    description: `You build up momentum and move in a
+short burst of speed, allowing you to add
+half your AGL to any damage points
+caused during the charge maneuver.
+You must effectively run into your
+opponent for this to work. This nature
+can only be used once per combat turn
+(10 rounds).`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+  },
+  {
+    name: `Cling`,
+    description: `You stick to walls, ceilings and other
+solid surfaces capable of holding your
+weight, and traverse them at full
+movement rates. You are able to exert
+your full STR and fight without penalty
+so long as you continuously touch a
+surface. Additional levels double the
+characters speed (Level 1 = Normal,
+Level 2 = 2x, Level 3 = 4x, Level 4 =
+8x, etc.)`,
+    tribe: `Arachne`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+  },
+];
+
+
+
+//list js logic
+var options = {
+  valueNames: [ 'name', 'description', 'tribe', 'activation' ],
+  item: '<li><h3 class="name mb-1 mt-2"></h3><p class="description"></p><strong>Tribe: </strong><span class="tribe"></span> <p><strong>Activation:</strong> <span class="activation"></span></p> </li>'
+};
+
+var hackerList = new List('hacker-list', options, natures);
+</script>
