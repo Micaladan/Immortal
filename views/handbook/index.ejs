@@ -3,10 +3,12 @@
 
    <div id="hacker-list"">
     <form class="search search-form mb-3">
+      <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Natures">
       <div style="display: flex;">
-        <input type="text" style="flex: 1;" class="search form-control form-control-md" placeholder="Search Natures">
-        <button style="flex: 0;" class="btn btn-success sort" data-sort="name">Sort</button>
-      
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
+        <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
       </div>
       </form>
    
@@ -24,6 +26,7 @@ var natures = [
     at once.`,
     tribe: `Arachne`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Absorb`,
@@ -53,6 +56,7 @@ var natures = [
     activation: `Activating this nature only makes it
     ready to use, it requires a normal action
     to bring the Nature’s effect into play.`,
+    type: `Nature`,
   },
   {
     name: `Aquatic`,
@@ -70,6 +74,7 @@ var natures = [
         END x 2000 fathoms instead of 1000
         fathoms)`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Arboreal`,
@@ -83,6 +88,7 @@ var natures = [
     3 = 4x, Level 4 = 8x, etc.)`,
     tribe: `Any`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Armor`,
@@ -95,6 +101,7 @@ do not explicitly deny the use of the
 nature as protection.`,
     tribe: `Peri`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Balance`,
@@ -103,6 +110,7 @@ balance or poor footing, including those
 penalties created by mystical means.`,
     tribe: `Any`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Beauty`,
@@ -131,6 +139,7 @@ appropriate.`,
     activation: `Activating this nature only makes it
 ready to use, it requires a normal action
 to bring the Nature’s effect into play.`,
+type: `Nature`,
   },
   {
     name: `Bioluminescence`,
@@ -146,6 +155,7 @@ selectively). The vision penalty will last
 until the end of the scene.`,
     tribe: `Phoenix`,
     activation: `Passive with activated ability`,
+    type: `Nature`,
   },
   {
     name: `Blood Drain`,
@@ -160,6 +170,7 @@ before any attack rolls are made.`,
     activation: `Activating this nature only makes it
 ready to use, it requires a passive action
 to bring the Nature’s effect into play.`,
+type: `Nature`,
   },
   {
     name: `Blur`,
@@ -174,6 +185,7 @@ This effect will last until the end of the
 scene.`,
     tribe: `Tuatha`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Body Compression`,
@@ -193,6 +205,7 @@ adult human fists)`,
     activation: `Activating this nature only makes it
 ready to use, it requires a normal action
 to bring the Nature’s effect into play.`,
+type: `Nature`,
   },
   {
     name: `Breath`,
@@ -205,6 +218,7 @@ purchased multiple times for multiple
 substances.`,
     tribe: `Any`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Burrow`,
@@ -222,6 +236,7 @@ your speed (Level 1 = Normal, Level 2 =
 2x, Level 3 = 4x, Level 4 = 8x, etc.)`,
     tribe: `Any`,
     activation: `Passive`,
+    type: `Nature`,
   },
   {
     name: `Camouflage`,
@@ -233,6 +248,7 @@ the bonus is equal to your full SPT.`,
     activation: `Activating this nature only makes it
 ready to use, it requires a passive action
 to bring the Nature’s effect into play.`,
+type: `Nature`,
   },
   {
     name: `Charge`,
@@ -248,6 +264,7 @@ can only be used once per combat turn
     activation: `Activating this nature only makes it
 ready to use, it requires a normal action
 to bring the Nature’s effect into play.`,
+type: `Nature`,
   },
   {
     name: `Cling`,
@@ -265,6 +282,822 @@ Level 2 = 2x, Level 3 = 4x, Level 4 =
     activation: `Activating this nature only makes it
 ready to use, it requires a passive action
 to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Deafen`,
+    description: `You create a penalty against all
+opponents in hand-to-hand combat
+range, equal to half your PRS. This is
+due to disorientation, loss of hearing,
+balance, etc. The effect lasts until the
+end of the scene; hearing protection if
+sufficient may reduce the penalty the
+target receives.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Discharge`,
+    description: `You emit a substance or odor (musk,
+deep shadows, pollen spores, ink),
+creating a penalty equal to half your
+STR against any of the target’s PER
+rolls that rely on the effected senses.
+The effects last until the character can
+remove the penalty (step out of the
+shadow, wash the ink out of his eyes,
+etc.) or the turn ends (when it
+dissipates). This affects all targets in
+hand-to-hand combat range; it cannot be
+selectively applied. You can use this
+nature once per turn (10 rounds).`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Discorporate`,
+    description: `You turn into a liquid, gas or other non-
+solid form as soon as the nature is
+
+activated. You flow through nearly any
+type of crack or tiny opening. You are
+able to transform mundane inanimate
+objects and willing living beings up to
+your own weight and carry and
+manipulate them. Conventional physical
+attacks will not harm you, but any
+weapon or item imbued with
+immaculum or other special energies do
+damage equal to the amount imbued into
+them. The power grants no other special
+capabilities such as special forms of
+damage, flight, invisibility, etc., other
+natures must be used. It remains in
+effect until the nature is deactivated.
+This nature is common to air, water, fire
+
+and shadow elementals and the Tribes
+listed below only.`,
+    tribe: `Osiri (ghost-form), Protean
+(shapeless water form)`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Discriminatory Smell`,
+    description: `(Enhanced Sense) You gain details from
+scents by using your PER in the same
+way you do eyesight. Environmental
+conditions, elapsed time since scent was
+left, etc. cause penalties to the roll. You
+are able to track individuals by scent
+with a simple PER roll (penalties can
+still apply).`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Echolocation`,
+    description: `You ignore all penalties that affect your
+vision so long as your hearing is not
+impaired. You can also communicate
+with other entities that have echolocation
+as well.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Elemental Essence`,
+    description: `You summon forth the essence of your
+element to attack your opponents in a
+radius equal to your SPT in yards. You
+can direct it at one opponent per action
+and it is resolved as a hand-to-hand
+unarmed attack (using your combat
+skills) with base damage equal to your
+WIL. Fire elementals will seemingly
+burst into flame (or even lightning
+possibly), winds will whip around an air
+elemental, water will dance and stream
+around water elementals and the very
+terrain will rise up at the command of an
+earth elemental. Shadow elementals call
+forth deep pools of deadly shadow that
+can coalesce into physical form.
+Your actual body is not transformed, but
+remains unharmed by the maelstrom
+around you. This nature is common for
+pure elementals and the Tribes listed
+
+132
+below only (and only for the element
+listed for the Tribe). You must expend
+actions to direct the elements; they do
+not move about on their own, they have
+no sentience.`,
+    tribe: `Peri (earth), Phoenix (fire) and
+Protean (water), Not Terat`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Elongated Limbs`,
+    description: `Your reach is extended one additional
+yard for every level purchased.
+Characters with longer reach impose
+tactical penalties against opponents with
+shorter reaches in hand-to-hand combat.
+This power can simulate longer arms
+and legs, the extended crushing power of
+a constrictor snake’s ability to coil
+around its target, an excessively long tail
+(when used with the Tail Nature) and so
+forth.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Enhanced Hearing`,
+    description: `(Enhanced Sense) You add half your
+SPT to all PER rolls to hear things in the
+normal range of audible sounds. It does
+not grant high or low frequency hearing
+however.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Enhanced Limbs`,
+    description: `Normally, whenever you shapeshift, you
+are granted the appropriate number of
+limbs. Enhanced limbs provides a bonus
+when grappling other opponents,
+enforcing on them a penalty equal to half
+your STR as long as you use more than
+one pair of limbs to grapple. The
+penalty is not cumulative per pair of
+limbs. If your himsati does not normally
+have more than two pairs of limbs (two
+legs and two arms, or two fore legs and
+two hind legs) then this power may be
+purchased multiple times, each time
+giving you one additional pair of limbs.
+The additional limbs do not grant
+additional STR bonus beyond the basic
+one-half, just allow you to hold
+additional items, targets, and so forth.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Enhanced Vision`,
+    description: `(Enhanced Sense) You add half your
+SPT to PER rolls to see things that can
+be seen in the normal range of the
+viewable light spectrum. It does not
+grant Infrared or Lowlight vision.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Flight`,
+    description: `You fly via wings, glider membranes, air
+control, etc. at your full movement rates.
+You take no penalties from fighting
+while flying. Additional levels double
+your speed (Level 1 = Normal, Level 2 =
+2x, Level 3 = 4x, Level 4 = 8x, etc.)`,
+    tribe: `Morrigan`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Haste`,
+    description: `You may add your SPT to your Initiative
+roll once per turn (not every round).`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Hibernation`,
+    description: `You enter a state of suspended
+animation and cannot voluntary come
+out until certain preset conditions are
+
+NOTE:
+Enhanced Limbs Examples
+S p i d e r a n d o c t o p u s h i ms a t i
+automatically have 8 limbs when
+shapeshifted. With this power, if the
+character used more than two limbs to
+grapple, his opponent would receive a
+penalty.
+A lion himsati automatically has 4
+limbs when shapeshifted. Each level
+of this power would give him an
+additional pair of limbs with which he
+can gain a penalty against his
+opponent.
+
+133
+
+met, or a certain amount of time has
+passed (decided when he begins
+Hibernating, maximum time is your
+END in months). You do not need to
+eat, drink, can withstand freezing
+temperatures and extreme heat as well as
+any normal weather condition while
+hibernating. You appear dead to any
+casual inspection.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `High (or Low) Range Hearing`,
+    description: `(Enhanced Sense) You make normal
+PER rolls to hear sounds above or below
+the normal range of the sounds audible
+to the human ear. Note this nature is
+automatically in use once activated and
+you are then vulnerable to attacks
+designed to go after these hearing ranges
+specifically. For example, if you have
+high range hearing, you will be sensitive
+
+to dog whistles, especially if they are
+used right next to you. High and Low
+are bought as separate natures.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Hyper`,
+    description: `The first level removes all penalties
+from simple ground-based obstacles
+while moving, the character moves
+fluidly around any obstacles where a
+quick and easy path can be found
+(dumpsters, cars, people, mailboxes,
+turned over trashcans, etc.) Additional
+levels double your speed. (Level 1 =
+Normal, Level 2 = 2x, Level 3 = 4x,
+Level 4 = 8x, etc.)`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Immunities`,
+    description: `You choose a normally harmful
+mundane substance (fire, acid, salt,
+radiation, etc.) and are completely
+
+Inspirations — Tribe Magdalen
+
+A Tactician, goddess of wisdom and war, oversees her troops in battle
+A Mentor with hints of the owl showing, demonstrates a serenade to his student
+
+An Explorer sets off in search of adventure and knowledge
+
+134
+
+immune to any damage from all non-
+magical forms of that substance.
+
+Against any magical form of the attack
+(imbued with Immaculum, created by a
+serenade) the Immunity acts as if you
+had armor, granting half your STR as
+armor against that particular attack. This
+will combine with the Armor nature.
+Poison cannot be chosen for immunity.
+You can purchase this multiple times for
+multiple substances.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Infrared Vision`,
+    description: `(Enhanced Sense) You “shut off” your
+normal method of seeing and now see
+heat patterns. It negates all vision
+penalties for darkness, allowing you to
+continue to make normal PER rolls to
+see. Anything that is at or near the same
+temperature as the surrounding air and
+surfaces will impose a penalty however,
+at the Narrator’s discretion. Sudden,
+violent changes in temperature can also
+temporarily blind you.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Leap`,
+    description: `If you leap straight up, your feet reach a
+height of your AGL + STR. In a
+standing horizontal jump you leap twice
+that far and six times with a running
+horizontal jump. Additional levels
+double your leap’s height/distance
+(Level 1 = Normal, Level 2 = 2x, Level
+3 = 4x, Level 4 = 8x, etc.)`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Low-Light Vision`,
+    description: `(Enhanced Sense) You see as if the
+lighting conditions were completely
+normal, in anything up to the complete
+absence of light, and take no vision
+penalties. However, any bright flashes
+of light, the use of the bioluminescence
+nature, etc. will have twice the effect/
+penalty on you.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Magnetic Sense`,
+    description: `You feel magnetic emanations within a
+number of yards equal to your SPT and
+always know which direction you are
+facing (N/S/E/W). You pick up on the
+basic magnetic fields of most creatures
+as well as most electronic equipment.
+This also negates vision penalties that
+impede normal vision, but strong
+conflicting fields can render the
+magnetic sense ineffective.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Mesmerize`,
+    description: `You hypnotize a target by making a
+contested PRS vs. PRS roll, with the
+target taking a penalty equal to half your
+WIL. If you win, the target will remain
+hypnotized for the remainder of the
+scene, or until someone does something
+to stir the target from the hypnotic state
+(scream at them, shake them, etc.).
+During this time you may implant a
+suggestion that will last a number of
+days equal to the exact amount you won
+by (minimum one day). The suggestion
+cannot cause the target to purposely
+harm himself, a loved one, etc.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Mimicry`,
+    description: `You can recreate any sound or voice
+you’ve heard. Those perceiving must
+make a PER roll against a target number
+equal to your PRS + SPT to realize the
+sound or voice is a fake.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Natural Weaponry`,
+    description: `You add half your SPT to your STR for
+determining damage from horns, claws,
+fangs, talons, etc. This can also be used
+to represent stingers (like those of a bee
+or the hooks found in a squid’s
+tentacles), electrical shocks (like those
+of an eel), etc.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Phasing`,
+    description: `Your body melds into other objects,
+physically merging with them and
+passing through them or resting inside.
+Serenades cannot be played while
+phasing. While phased, you are
+invisible to all PER rolls save those
+granted by serenades, and you do not
+need to breathe. You can stay this way
+until the normal need to sleep, eat, etc.
+overtakes you, or you decide to stop
+phasing. This does not grant you any
+form of control over the object.
+You can only phase through objects
+related to your himsati (ex: earth
+elemental through stone, metal, etc.; a
+water elemental through water or ice). If
+you rest inside the object, you are
+carried within it should the object move
+or be moved, and you cannot sense what
+is happening outside the object without
+physically peering out. This nature is
+common to pure elementals and the
+Tribes listed only.`,
+    tribe: `Peri`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Poison`,
+    description: `You can deliver a poison to your target
+instead of damage on a successful attack.
+You must choose to deliver the poison
+before the attack roll is made. The
+poison creates a penalty against all the
+target’s actions equal to half your STR,
+and will affect Immortals. Characters
+possessing this nature metabolize
+standard synthetic poisons and toxins
+(such as alcohol) at normal human rate.`,
+    tribe: `Sharakai`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Regrowth`,
+    description: `You continuously regenerate lost limbs
+or organs automatically while in full
+himsati. You gain back the lost limb or
+
+organ at a rate of your SPT * 10% per
+week (ex: A 5 SPT would bring back
+50% of the limb or organ in one week).
+This nature will not function if you are
+damaged, all boxes of damage must be
+healed first.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Secrete (Sticky or Slippery)`,
+    description: `You secrete a substance that can hinder
+your opponents. Each version, Slippery
+and Sticky, is bought as a separate
+nature. Any substance generated this
+way dissipates within a day unless you
+take the time to reinforce it to last
+longer. The substance cannot be gotten
+rid of by a simple act of will, it is a real
+substance and not just an effect.
+Slippery: You create a penalty equal to
+half your AGL to be used against
+someone trying to grapple you or trying
+to climb or maintain balance on a
+surface you have coated. The slime of
+slug is an example of Slippery.
+Sticky: You create a target number
+equal to your STR + SPT that a target
+must overcome in order to break away
+from the secreted substance. The
+webbing of a spider is an example of
+Sticky.
+NOTE:
+Sticky/Slippery Area of Effect
+The character can cover an area equal
+to his AGL x AGL in square feet in a
+single combat turn (ex: a spider with a
+5 AGL could make a 25 square foot
+web, of any shape, in one combat turn).`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Size (Growth or Shrink)`,
+    description: `When you assume full himsati you
+automatically grow or shrink to the
+appropriate size as shown on the chart
+below. You need Growth or Shrink to
+alter your size from that point: Each
+level of Growth allows your himsati to
+move up one size range and each level
+of Shrink down one size range. All
+movement modifiers are made before
+any multipliers for movement natures/
+serenades. Growth and Shrinking
+automatically activate when you shift to
+full himsati — they only work while in
+full himsati. Your size will not
+immediately change, it takes a conscious
+act of will (standard action) to change
+your size. You can choose to be any
+size within the levels you purchased.
+Growth and Shrink are purchased as
+separate natures.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Sleeping Lungs`,
+    description: `Sleeping Lungs only has two levels.
+The first level allows you to go a full
+scene without needing to breathe in any
+way, even in a vacuum. The second
+level allows you to go indefinitely until
+the nature is deactivated.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Species Communication`,
+    description: `While in full himsati, you are able to
+communicate with mortal beings of the
+same species as your himsati. A cobra
+could communicate with mortal snakes
+and understand them. It also allows
+immortals of the same species to secretly
+communicate in front of others not of the
+same species. A character can switch
+between normal and companion
+communication at any time with no
+action.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a passive action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Spew`,
+    description: `You must already possess Discharge,
+Elemental Essence, Poison or Secrete to
+have this nature, though you do not have
+to activate those natures in order to use
+it. It allows you to shoot the other
+nature’s substance at a range of three
+times your STR in yards as a Throwing
+skill-based attack. The normal effects of
+MASTER SIZE CHART
+Size
+Range
+
+Effects / Examples
+(height, length and weight should
+all be considered)
+-3 +3 Stealth, -3 Movement Rates
+Insects, earthworms, snails, small
+spiders (a few inches, well under
+one-half pound)
+
+-2 +2 Stealth, -2 Movement Rates
+Rabbits, fish, small birds, mice,
+large spiders (easily held in the
+palms of two adult human hands)
+-1 +1 Stealth, -1 Movement Rates
+Foxes, raccoons, large parrots,
+medium sized dogs, goats (a
+human can still pick up, even with
+a little difficulty)
+
+±0 Adult humans, large dogs (great
+dane, saint bernard), wolves,
+tigers, gorillas, regular horses
++1 +1 Bonus for attackers to hit, +1
+
+Movement Rates
+Clydesdale Horse, bison, rhino,
+large snake such as a python
++2 +2 Bonus for attackers to hit, +2
+
+Movement Rates
+Elephant, giraffe, small dragon
++3 +3 Bonus for attackers to hit, +3
+
+Movement Rates
+Blue Whale, large dragon
+
+137
+
+the substance apply as per the nature
+supplying the substance. This allows
+fire breathing, spitting poison or ink,
+breathing blasts of air, launching pollen.
+OPTIONAL RULE:
+Spew and Size
+If the Narrator permits, creatures of
+Size 2 can attack 2 side-by-side
+opponents simultaneously with Spew
+and creatures of Size 3 can attack 3
+side-by-side opponents.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Stillness`,
+    description: `You can meld yourself to the
+architecture or other surroundings and
+become part of it, composed of the same
+material and showing the same signs of
+wear and aging. Even to enhanced
+senses and close inspect you will merely
+be an extension of what you have
+attached yourself to, a sculpture or statue
+attached to the surface of a building, etc.
+You do not need to breathe while
+attached, and can stay this way until the
+normal need for eat, sleep, etc. overtakes
+you, or you move. You are unable to
+take any other actions, but are still aware
+of your surroundings and can see in the
+direction you are facing. You cannot
+use this power to pass through an object,
+this would require the Phasing nature.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Swarm`,
+    description: `You break up into a hive-like group of
+miniature copies of your himsati. You
+lose the ability to sing serenades during
+this but still have access to all natures.
+While in this form, the swarm is able to
+descend upon a target and attack it in
+
+this form. The target’s armor is negated
+unless it is a complete head to toe
+covering (this negates the armor nature).
+The swarm takes damage and is affected
+as a single unit, and when you return to
+your normal state, you retain all damage
+taken by the swarm.
+The swarm also gains a bonus to all
+dodge attempts equal to half your SPT.
+If a significant part of the swarm is
+separated from you when you return to
+your normal state, you take damage
+equal to the percentage of the swarm lost
+(the lost part of the swarm immediately
+dies when you return to your normal
+state). You can remain in swarm state
+until the end of the scene, unless you
+decide to stop using the nature sooner.
+This nature is only common for insects,
+plants and listed Tribes.`,
+    tribe: `Arachne, Not Terat`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+    type: `Nature`,
+  },
+  {
+    name: `Swell`,
+    description: `You receive a bonus of half your END
+when attempting to escape a grapple or
+any other bonds as your body swells.
+You can remain like this until the end of
+the scene if so desired.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+    type: `Nature`,
+  },
+  {
+    name: `Synthesis`,
+    description: `You heal at twice the normal rate when
+exposed to certain conditions or
+substances (sunlight, dust, water, while
+touching your companion animal, etc.).
+In addition, exposure to the substance
+negates the need to eat or drink. This
+nature can be purchased more than once
+to allow synthesis with more than one
+substance. The substance must be
+picked when the nature is taken.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Tail`,
+    description: `At the first level, you use your tail as a
+club with your full STR. If you do not
+already have a tail, this nature will give
+you one. At the second level the tail
+becomes prehensile and can manipulate
+objects almost like another hand, it
+allows you to fight with a weapon in
+
+your tail as if you were fighting off-
+hand. Tail only has two levels, unless
+
+the Narrator wishes to allow additional
+levels to represent extra tails (such as the
+infamous 9-tailed fox).`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
+  },
+  {
+    name: `Terrible Countenance`,
+    description: `You gain a bonus equal to half your SPT
+for any social interactions where you
+attempt to intimidate someone due to
+feral looks, monstrous appearance, etc.
+When in full himsati, you may instead
+direct your terrible countenance at a
+single target, forcing the target to roll his
+WIL against a target number equal to
+
+your PRS. Failure indicates the target
+cannot bring himself to attack you, and
+will cower in fear (or perhaps run away
+if they botch their roll). If you attempt
+to direct the power of the nature at
+multiple targets, the number of targets is
+subtracted from your PRS for
+determining their target number to resist.
+(IE -- Attempting to affect 3 targets
+subtracts 3 from your PRS). The effect
+lasts until the end of the scene, but can
+last longer if the Narrator deems it
+appropriate.`,
+    tribe: `Any`,
+    activation: `Activating this nature only makes it
+ready to use, it requires a normal action
+to bring the Nature’s effect into play.`,
+type: `Nature`,
+  },
+  {
+    name: `Vibration Sense`,
+    description: `You feel vibrations that pass through
+any surface you are touching. The
+closer or stronger it is, the more you
+know; you can determine numbers,
+rough sizes, distance, etc. You make a
+PER roll against a target number set by
+the Narrator to determine exactly how
+much you know.`,
+    tribe: `Any`,
+    activation: `Passive`,
+    type: `Nature`,
   },
 ];
 
@@ -272,8 +1105,8 @@ to bring the Nature’s effect into play.`,
 
 //list js logic
 var options = {
-  valueNames: [ 'name', 'description', 'tribe', 'activation' ],
-  item: '<li><h3 class="name mb-1 mt-2"></h3><p class="description"></p><strong>Tribe: </strong><span class="tribe"></span> <p><strong>Activation:</strong> <span class="activation"></span></p> </li>'
+  valueNames: [ 'name', 'description', 'tribe', 'activation', 'type' ],
+  item: '<li><h3 class="mb-1 mt-2"><span class="name"></span> - <span class="type"></span></h3><p class="description"></p><strong>Tribe: </strong><span class="tribe"></span> <p><strong>Activation:</strong> <span class="activation"></span></p> </li>'
 };
 
 var hackerList = new List('hacker-list', options, natures);
