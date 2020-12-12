@@ -1,19 +1,55 @@
 <% layout("layouts/boilerplate")%>
- <h1>Player's Handbook</h1> 
+ <h1>Player's Handbook
 
-   <div id="hacker-list"">
-    <form class="search search-form mb-3">
-      <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Natures">
-      <div style="display: flex;">
-        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
-        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
-        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
-        <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
-      </div>
-      </form>
-   
-      <ul class="list"></ul>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#searchNatures" aria-expanded="false" aria-controls="searchNatures">Search Natures</button>
+  <button class="btn btn-primary disabled" type="button" data-toggle="collapse" data-target="#searchSerenades" aria-expanded="false" aria-controls="searchSerenades">Search Serenades</button>
+  <button class="btn btn-primary disabled" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Search Skills</button>
+
+ </h1> 
+
+
+
+    <!-- //Toggle Natures search
+    //
+    // -->
+    <div class="collapse show multi-collapse" id="searchNatures">
+      <div id="hacker-list"">
+        <form class="search search-form mb-3">
+          <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Natures">
+          <div style="display: flex;">
+            <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
+            <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
+            <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
+            <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
+          </div>
+          </form>
+       
+          <ul class="list"></ul>
+        </div>
     </div>
+    <!-- //End of nature search
+    //start of serenade search
+  </div> -->
+    <div class="collapse multi-collapse" id="searchSerenades">
+        <!-- <div id="hacker-list"> -->
+          <form class="search search-form mb-3">
+            <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Serenades">
+            <div style="display: flex;">
+              <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
+              <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
+              <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
+              <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
+            <!-- </div> -->
+            </form>
+         
+            <ul class="list"></ul>
+          </div>
+      </div>
+    
+    <!-- // end of sernade search -->
+  </div>
+</div>
+  
 <script>
 //natures
 var natures = [
