@@ -53,9 +53,17 @@ app.get('/investigations', async (req, res) => {
   const investigations = await Investigation.find({});
   res.render('investigations/index', { investigations });
 });
-//Get index for Handbook
-app.get('/handbook', (req, res) => {
-  res.render('handbook/index');
+//Get index for Natures
+app.get('/natures', (req, res) => {
+  res.render('handbook/natures');
+});
+// Get index for Serenades
+app.get('/serenades', (req, res) => {
+  res.render('handbook/serenades');
+});
+// Get index for Skills
+app.get('/skills', (req, res) => {
+  res.render('handbook/skills');
 });
 // Get new Person form
 app.get('/people/new', (req, res) => {

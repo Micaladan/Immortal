@@ -1,0 +1,15 @@
+<% layout("layouts/boilerplate")%>
+ <h1>Skills</h1> 
+ <div id="hacker-list"">
+    <form class="search search-form mb-3">
+      <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Skills">
+      <div style="display: flex;">
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
+        <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
+      </div>
+      </form>
+      <ul class="list"></ul>
+    </div>
+  </div>

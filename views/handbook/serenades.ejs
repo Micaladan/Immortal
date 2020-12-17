@@ -1,0 +1,447 @@
+<% layout("layouts/boilerplate")%>
+ <h1>Serenades</h1> 
+ <div id="hacker-list"">
+    <form class="search search-form mb-3">
+      <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Serenades">
+      <div style="display: flex;">
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
+        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
+        <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
+      </div>
+      </form>
+      <ul class="list"></ul>
+    </div>
+  </div>
+
+  <script>
+      const serenades = [
+          {
+              attention: `Destruction`,
+              name: `Deadly Swarm`,
+              effect: `The character hums and buzzes
+slightly, and a stream of insects pour
+forth from the nearest nest/hive/etc. The
+stream is far larger than the hive could
+hold, and it forms a huge cloud that
+attacks everything in the area.`,
+              focus: `Swarm of biting/stinging insects`,
+              baseCost: `6`,
+              aoe: `1`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+          {
+              attention: `Destruction`,
+              name: `Ember`,
+              effect: `The target erupts into a gout of
+flame, taking damage once per round.
+The target burns until the serenade total
+drops to its BODY. Mundane attempts
+to put out the fire (water, smothering,
+etc.) will not put the fire out, but will
+decrease the strength at least some.`,
+              focus: `Spontaneous Combustion (Fire)`,
+              baseCost: `6`,
+              aoe: `0`,
+              duration: `0(-E)`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+          {
+              attention: `Destruction`,
+              name: `Fireball`,
+              effect: `The character manifests a ball of
+fire over his head and directs it at the
+target area. It instantly travels there and
+explodes outwards covering the AoE.`,
+              focus: `Fireball`,
+              baseCost: `6`,
+              aoe: `1`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Hailstorm`,
+              effect: `The character blows icy breath
+into his cupped hands, revealing a ball of
+ice that he drops on the ground.
+Immediately the sky grows dark and
+huge hailstones drop from the sky into
+the affected area. The stones will
+bounce off objects to reach characters
+protected by overhead shelter when
+possible`,
+              focus: `Hailstones (Ice Motif)`,
+              baseCost: `6`,
+              aoe: `2`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Mindstorm`,
+              effect: `The character manifests droplets
+of water that fly through the air and
+continuously drop down onto the target,
+creating a cacophony of mind-rending
+sound within the target’s mind.`,
+              focus: `Rain`,
+              baseCost: `5`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Mind`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Rending Vines`,
+              effect: `The character points at the
+ground and huge vines erupt from the
+ground, grabbing and tearing at all.`,
+              focus: `Thorny Vines (Vines)`,
+              baseCost: `6`,
+              aoe: `1`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Spear of Destiny`,
+              effect: `Jagged Spear (Metal)`,
+              focus: `A magical spear manifests in the
+character’s hand and is thrown with
+uncanny accuracy at the target, the spear
+only misses if the serenade total does not
+generate an effect level.`,
+              baseCost: `5`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Surge`,
+              effect: `Lightning leaps from the
+character’s hands at the target.`,
+              focus: `Lightning`,
+              baseCost: `5`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `The Shout`,
+              effect: `This is the only known
+exception for destruction serenades in
+that it uses the cry, howl or call of the
+character’s own himsati as the focus.
+The character’s vocal chords temporarily
+revert to himsati as he lets out a
+shockwave based on his himsati.`,
+              focus: `Himsati Cry/Howl/Call`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Thundercrack`,
+              effect: `The character slams his hands
+together, causing an ear-splitting rolling
+blast of thunder to ripple out in a cone-
+shape (same rough area as AoE 1
+radius).`,
+              focus: `Cone of Rolling Thunder`,
+              baseCost: `6`,
+              aoe: `1`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Destruction`,
+              name: `Wolven Rage`,
+              effect: `The character lets out a wolf-
+howl and a spiritual wolf appears from
+nearby, leaving a glowing trail. The
+spirit circles the target, diving in and
+attacking, doing damage to the target
+once per round until the serenade
+strength drops to the target’s BODY.`,
+              focus: `Mystical Wolf Spirit (Wolves)`,
+              baseCost: `6`,
+              aoe: `0`,
+              duration: `0(-E)`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Constrictor`,
+              effect: `The character manifests a
+magical boa constrictor that wraps
+around and holds the target.`,
+              focus: `Boa Constrictor (Snakes)`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `1(-E)`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Embrace`,
+              effect: `The character touches his target;
+his motif covers the target, making it
+impossible to move. If the character
+stops touching the target however, he is
+immediately freed. This may require a
+physical conflict in order to touch the
+target.`,
+              focus: `Immobilizing Touch`,
+              baseCost: `3`,
+              aoe: `Touch`,
+              duration: `2(-T)`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Filament`,
+              effect: ``,
+              focus: `Webbing`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `2(-E)`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Frost Wall (WARP)`,
+              effect: `Frostwall borrows from the
+
+attention of destruction. It creates a wall
+of ice that must be broken through;
+however, it is so cold that anything
+touching it takes frostbite damage every
+round they touch it (mundane protective
+clothing will not resist this damage).
+The current strength is compared to the
+BODY of anyone who touches the wall
+to determine damage.`,
+              focus: `Wall of super-cold ice`,
+              baseCost: `5`,
+              aoe: `1`,
+              duration: `1(-E)`, 
+              target: `6`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Gorgon`,
+              effect: `The character turns the target to
+stone.`,
+              focus: `Stone`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `2(-E)`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Hedgemaze`,
+              effect: `Anyone in the AoE finds
+themselves trapped in a hedge maze.
+The maze even grows over the target’s
+head to prevent him from climbing out.
+The target can try to break his way
+through or he can search for the exit. If
+he finds the exit, the serenade ends
+immediately. The serenade total should
+be used as the target number to search
+for the exit, plus any applicable bonuses
+or penalties. Eventually the hedge
+shrivels up and crumbles at the end of
+the duration.`,
+              focus: `Bushes`,
+              baseCost: `5`,
+              aoe: `1`,
+              duration: `2(-T)`, 
+              target: `6`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Metalstruck`,
+              effect: `An area effect restraint, the
+character conjures a small metal object
+
+166
+at the center of the AoE and all
+characters cannot pull free from the area
+as they are spiritually magnetized to the
+object.`,
+              focus: `Magnetism`,
+              baseCost: `5`,
+              aoe: `1`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Mindwave`,
+              effect: `The target’s head is filled with
+so much prose that he cannot think
+straight enough to do anything. Since
+this serenade targets the MIND, the
+target must use his WIL to break free
+instead of his STR.`,
+              focus: `Writer’s Block (Poetry)`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Mind`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Quake`,
+              effect: `The character conjures and
+tosses a small stone at the ground. The
+ground shakes and trembles as chasms
+open up that swallow up the target and
+close him. The target must then dig his
+way out of the underground chasm or
+wait until the aftershocks open the
+ground back up again to release him at
+the end of the scene.`,
+              focus: `Creating Chasms (Earth)`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Obstruction`,
+              name: `Weld`,
+              effect: `The character sticks two or
+more things together: two inanimate objects,
+two living creatures, or a living creature
+and an inanimate object. The serenade
+is already designed to affect a number of
+targets up to the character’s SPT, so the
+–2 penalty is ignored. Attempting to
+stick together more targets would incur
+the –4 or –6 penalty. Each target breaks
+free from the weld based on the effect
+level he is under.`,
+              focus: `Stick Together`,
+              baseCost: `5`,
+              aoe: `Special (see description)`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Mimicry`,
+              name: `Epitome`,
+              effect: `The character manifests a
+chaotic whirlwind from his motif,
+surrounding the target and recipient.
+The character chooses which nature(s)
+he is attempting to copy before making
+the roll. The serenade works on mortal
+animals as well, granting the recipient
+only base levels in the appropriate
+natures. There are exceptions — such as
+a cheetah having a high Hyper nature.`,
+              focus: `Copy Himsati Natures`,
+              baseCost: `4`,
+              aoe: `0`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Mimicry`,
+              name: `Rapier`,
+              effect: `The character activates one or
+more of his natures and then manifests
+the power of his motif. It grabs up the
+natures and places them into a weapon
+of the character’s choosing. If the
+weapon is given to another individual, it
+uses their attributes with the natures as
+appropriate. The wielder must expend at
+least passive actions to use the natures in
+the weapon. This is a good serenade for
+natures like Beauty, Deafen,
+Discorporate, Poison, Secrete and
+Terrible Countenance.`,
+              focus: `Weapon Natures`,
+              baseCost: ``,
+              aoe: `Self Only`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+           {
+              attention: `Mimicry`,
+              name: `Gemetria (WARP)`,
+              effect: `The character is changed into
+multiple copies of his himsati that flee
+
+the area and attempt to “rejoin” and
+reform the character at the end of the
+duration. Even if all but one clone is
+destroyed, that one clone reforms into
+the character’s human form. There is no
+resistance for complexity since the
+character is copying himself.
+The serenade borrows from the aperture
+attention (covered in the Narrator’s
+Guide) allowing the SPT and Vox of the
+character to move between the clones.
+The higher the effect level, the longer
+the clones are willing to stay apart.
+The character can make a number of
+clones based on the same penalty as
+affecting multiple targets. One clone at
+no penalty, a number up to his SPT for –
+2, up to twice his SPT for –4, and up to
+three times his SPT for –6. Very small
+creatures will make additional copies to
+fill up a volume equal to a size zero
+creature.`,
+              focus: `Escaping Himsati Copies`,
+              baseCost: `5`,
+              aoe: `Self Only`,
+              duration: `0`, 
+              target: `Body`,
+              resistance: `None`,
+          },
+      ]
+      //list js logic
+var options = {
+  valueNames: [ 'attention', 'name', 'effect', 'focus', 'baseCost', 'aoe', 'duration', 'target', 'resistance' ],
+  item: '<li><h3 class="mb-1 mt-2"><span class="name"></span> - (Attention of <span class="attention"></span>)</h3><p class="effect"></p><p><b>Focus: </b><span class="focus"></span>  <b>Base Cost: </b><span class="baseCost"></span>  <b>AOE: </b><span class="aoe"></span>  <b>Duration: </b><span class="duration"></span>  <b>Target: </b><span class="target"></span>  <b>Resistance: </b><span class="resistance"></span></p></li>'
+};
+
+var hackerList = new List('hacker-list', options, serenades);
+</script>
+  </script>
