@@ -1,15 +1,530 @@
 <% layout("layouts/boilerplate")%>
- <h1>Skills</h1> 
+ <h1>Skills</h1>
+ <p>(Note: special skills unlock later on)  </p> 
+
  <div id="hacker-list"">
-    <form class="search search-form mb-3">
-      <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Skills">
-      <!-- <div style="display: flex;">
-        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort Name</span>
-        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="tribe">Sort Tribe</span>
-        <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="activation">Sort Activation</span>
-        <button style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>      
-      </div> -->
-      </form>
-      <ul class="list"></ul>
+  <form class="search search-form mb-3">
+    <input type="text" style="flex: 10;" class="search form-control form-control-md" placeholder="Search Skills">
+    <div style="display: flex;">
+      <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="baseCost">Sort Base Cost</span>    
+      <span class="sort btn btn-sm btn-info flex-grow-1" data-sort="name">Sort by Name</span>    
+      <span style="flex: 0;" class="btn btn-success btn-sm sort flex-grow-1" data-sort="name">Reset</button>     
     </div>
+    </form>
+    <ul class="list"></ul>
   </div>
+</div>
+
+<script>
+
+var skills = [
+{
+  name: `Biology`,
+  category: `Academics`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Willpower`,
+  description: `The study of life and of living
+organisms, including their structure,
+function, growth, origin, evolution and
+distribution.`,
+  suggestedFoci: `Agriculture, Anatomy,
+Biochemistry, Botany, Genetics, Marine
+Biology, Microbiology, Physiology,
+Zoology`
+},
+
+{
+  name: `Earth Science`,
+  category: `Academics`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Willpower`,
+  description: `The study of the origin, structure, and
+physical phenomena of the Earth and
+other celestial bodies. While this does
+cover other planets, this does not cover
+Dominions that exist in other
+dimensions; for example the Maelstrom,
+Underground or Ys.`,
+  suggestedFoci: `Astronomy,
+Cartography, Ecology, Gemology,
+Geography, Geology, Metallurgy,
+Meteorology, Oceanography`
+},
+{
+  name: `Linguistics`,
+  category: `Academics`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Willpower`,
+  description: `The study of the nature, structure, and
+variation of language and symbols.
+Characters do not need to take
+Linguistics in order to speak their native
+tongue. They are automatically assumed
+to have a focus in the ability to read/
+write and to speak their native language
+with a skill equivalent to their WIL.`,
+  suggestedFoci: `Read/Write (specific
+language), Speak (specific language),
+Speed Read, Cryptography, Heraldry,
+Modern Translator, Translation – Dead
+Languages, Design Con Lang, Historical
+Linguistics`
+},
+{
+  name: `Occult`,
+  category: `Academics`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Willpower`,
+  description: `The study of humanity’s relationship to
+the supernatural world.`,
+  suggestedFoci: `Cabalism,
+Demonology, Folklore, Mythology,
+Paranormal Studies, Theology,
+Witchcraft`
+},
+{
+  name: `Theoretical Sciences`,
+  category: `Academics`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Willpower`,
+  description: `Those sciences that deal with base
+interactions of energy, matter and
+relationships of quantities.`,
+  suggestedFoci: `Alchemy, Chemistry,
+Mathematics, Quantum Mechanics,
+Physics`
+},
+{
+  name: `Social Sciences`,
+  category: `Academics`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Willpower`,
+  description: `The study of human society and of
+individual relationships in and to
+society.`,
+  suggestedFoci: `Anthropology,
+Archeology, Civics, Genealogy,
+Heraldry, History, Law, Philosophy,
+Political Science, Psychology, Sociology`
+},
+{
+  name: `Animal Discipline`,
+  category: `Actives`,
+  baseCost: `4`,
+  attribute: `AGL & PRS by focus`,
+  description: `The various actions involved in working
+with animals, both wild and domestic.`,
+  suggestedFoci: `Handling, Riding,
+Taming, Training`
+},
+{
+  name: `Evasion`,
+  category: `Actives`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The art of avoiding detection as a means
+to escape, hide or follow others.`,
+  suggestedFoci: `Blending (into a
+crowd), Camouflage, Shadowing,
+Stealth`
+},
+{
+  name: `Ground Vehicle`,
+  category: `Actives`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The ability to operate standard,
+motorized multi-wheeled vehicles under
+various duress situations (i.e. car chases,
+shadowing someone using a vehicle).
+Many countries require different classes
+of operation licenses depending on the
+
+type of vehicle and foci can be broken
+down as such by the Narrator.`,
+  suggestedFoci: `Car/Truck,
+Construction Vehicle, Limousine,
+Motorcycle, Tractor-Trailer/CDL`
+},
+{
+  name: `Gymnastics`,
+  category: `Actives`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `Performing trained feats of physical
+agility.`,
+  suggestedFoci: `Acrobatics, Balancing,
+Breakfall, Climbing, Escape Artistry,
+Leaping`
+},
+{
+  name: `Pilot`,
+  category: `Actives`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The ability to operate flying craft; this
+skill does not apply to Mystech-based
+craft however.`,
+  suggestedFoci: `Glider, Rotor-craft,
+Prop-engine, Turbine/Jet Engine,
+Commercial Airliner`
+},
+{
+  name: `Shipboard`,
+  category: `The ability to operate waterborne
+vessels; this does not apply to Mystech-
+based craft however.`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The ability to operate waterborne
+vessels; this does not apply to Mystech-
+based craft however.`,
+  suggestedFoci: `Canoe, Cruise Ship,
+Galleon, Paddleboat, Sailboat,
+Speedboat, Waverunner, Yacht`
+},
+{
+  name: `Sports`,
+  category: `Actives`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `AGL`,
+  description: `Recreational activities for enjoyment or
+competition.`,
+  suggestedFoci: `Ballooning, Baseball,
+Basketball, Cycling, Fishing, Ice
+Skating, Lacrosse, Rollerblading, Scuba
+Diving, Snow Skiing, Skydiving,
+Soccer, Surfing, Swimming, Track &
+Field, Water Skiing`
+},
+{
+  name: `Survival`,
+  category: `Actives`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The ability to take care of basics as one
+makes his way in the wilderness or other
+foreign environ.`,
+  suggestedFoci: `Foraging, Hunting,
+Navigation, Scouting, Shelter, Tracking,
+Trapping.`
+},
+{
+  name: `Dodge`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The ability to avoid being struck by
+various incoming attacks, primarily
+ranged — but can be used to avoid close
+quarters attacks as well. Dodging
+involves large gross-body movements
+such as leaping out of the way, diving
+for cover and dropping low, where
+counterattacks and blocks are not
+possible. Foci for dodge are by meta-
+category of weapon or type.`,
+  suggestedFoci: `Firearm, Melee,
+Missile, Thrown, Unarmed`
+},
+{
+  name: `Blade Weapons`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `The use of single-blade weapons used
+primarily for thrust and slice maneuvers
+at an opponent. It covers individual
+weapons and weapon styles of fighting.`,
+  suggestedFoci: `Florentine, Great
+Sword, Kenjutsu, Knife, Long Sword,
+Short Sword`
+},
+{
+  name: `Bashing Weapon`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `This includes the use of handheld
+weapons for primarily swing maneuvers
+at an opponent; it includes both blunt
+and sharp-edged/pointed swing
+weapons.`,
+  suggestedFoci: `Axe, Baton, Billy Club,
+Club, Escrima Sticks, Flail, Mace, Tonfa`
+},
+{
+  name: `Firearm`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `PER`,
+  description: `This includes hand-projectile weapons
+using some form of chemical reaction
+(such as gunpowder) to launch the
+projectile.`,
+  suggestedFoci: `Automatic Pistols,
+Automatic Rifles, Black Powder,
+Carbine, Flintlock, Pistol, Rifle,
+Shotgun, Sniper Rifle, Submachine Gun`
+},
+{
+  name: `Military Weapon`,
+  category: `Combat`,
+  baseCost: `5`,
+  attribute: `PER`,
+  description: `Modern Large-scale weapons used in
+battles.`,
+  suggestedFoci: `Anti-tank Gun,
+Demolitions, Grenade Launcher,
+Machine Gun, Mortal Rail Gun, Rocket
+Launcher, Rotary Barrel Mini-Gun`
+},
+{
+  name: `Missile Weapon`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `PER`,
+  description: `Hand-held projectile weapons that use a
+combination of muscle-power and a
+launching mechanism of some kind.`,
+  suggestedFoci: `Bow, Crossbow, Sling,
+Slingshot`
+},
+{
+  name: `Parrying Weapon`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `This includes weapons designed to
+primarily block incoming armed and
+unarmed strikes. Special rules apply to
+using Parrying Weapons to counter
+incoming attacks, see Page 205.`,
+  suggestedFoci: `Bracers, Buckler, Main
+Gauche, Parrying Dagger, Sai`
+},
+{
+  name: `Polearm Weapon`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `All long shafted weapons not used for
+throwing purposes. Note that weapons
+such as spear and javelin can be taken as
+foci in this skill when used for hand-to-
+hand combat instead of being thrown.`,
+  suggestedFoci: `Bo Staff, Halberd,
+Jousting Spear, Naginata, Quarterstaff`
+},
+{
+  name: `Thrown Weapon`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `All hand-held projectiles launched by
+throwing, not using any form of
+launching system.`,
+  suggestedFoci: `Bola, Dagger, Grenade,
+Javelin, Poison Darts, Spear`
+},
+{
+  name: `Unarmed Combat`,
+  category: `Combat`,
+  baseCost: `4`,
+  attribute: `AGL`,
+  description: `Forms of fighting without weapons, or
+with small improvised weapons such as
+broken bottles, shoes, brass knuckles,
+hand-held claws, etc.`,
+  suggestedFoci: `Brawling, Himsati (use
+of claws, fangs and horns), Martial Art,
+Streetfighting, Wrestling (Classic of
+Professional)`
+},
+{
+  name: `Exotic Weapon`,
+  category: `Combat`,
+  baseCost: `2`,
+  attribute: `AGL`,
+  description: `Each exotic weapon is not a foci, but
+instead a separate skill with a base cost
+of 2; the character still receives his foci
+bonus die however. Narrators may place
+these in other skills as foci however, if
+fitting in their campaign.`,
+  suggestedFoci: `3-Section
+Staff, Catapult, Chain, Flame Thrower,
+Net, Nunchaka, War Fan, Whip`
+},
+{
+  name: `Artistry`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `PRE`,
+  description: `Ability in the Fine Arts`,
+  suggestedFoci: `Drawing, Painting,
+Sculpting, Writing (prose, journalism,
+lyrics)`
+},
+{
+  name: `Business`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `WIL`,
+  description: `This includes the major aspects of
+running a business`,
+  suggestedFoci: `Advertising, Finance,
+Human Resources, Management,
+Marketing, Sales`
+},
+{
+  name: `Computer`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `WIL`,
+  description: `This includes those aspects related to use
+of modern computers and technological
+devices in the mortal world. General
+daily use of computers and Internet
+Kiosks does not require a skill purchase
+in the game.`,
+  suggestedFoci: `Hacking, Hardware,
+Networking, Security Systems, Software`
+},
+{
+  name: `Crafts`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `WIL`,
+  description: `This includes rustics and hobbies that
+may or may not appear in a workplace.`,
+  suggestedFoci: `Armorer, Brewer,
+Clothier, Gourmet Cook, Floral
+Arranging, Gunsmith, Jeweler
+(Lapidary) Leatherworker, Photography,
+Smith`
+},
+{
+  name: `Investigation`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `PER`,
+  description: `This includes abilities in the art of
+assessment, followed by deduction and
+speculation`,
+  suggestedFoci: `Criminology, Data
+Analysis, Forensics, Lip Reading (for
+any language the character has a focus
+in), Probing (examination of body
+language), Profiling`
+},
+{
+  name: `Larceny`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `AGL and PER by focus`,
+  description: `This includes abilities used in the art of
+thievery and criminal professions.`,
+  suggestedFoci: `Forgery, Gambling,
+Graft, Lock Pick, Pick Pocket, Sleight of
+Hand, Streetwise (urban scouting),
+Underworld`
+},
+{
+  name: `Medicine`,
+  category: `Professional`,
+  baseCost: `4`,
+  attribute: `WIL`,
+  description: `This includes ability in the art of
+healing.`,
+  suggestedFoci: `Acupuncture,
+Biofeedback, First Aid, Herbalism,
+Meditation, Pathology, Physician,
+Surgery, Toxicology`
+},
+{
+  name: `Trades`,
+  category: `Professional`,
+  baseCost: `2`,
+  attribute: `Varies by type`,
+  description: `Each Trade is a separate professional
+skill bought with a base cost of 2 instead
+of 4; the character still receives the foci
+bonus however. Narrators may place
+these as foci within other skills if it fits
+their campaigns.`,
+  suggestedFoci: `Architect,
+Carpenter, Civil Engineer, Electrician,
+Mechanic, Plumber, Teacher (of other
+skill and foci)`
+},
+{
+  name: `Culture`,
+  category: `Social`,
+  baseCost: `2 for immortals (4 for humans)`,
+  attribute: `Normally PRS-based but can be
+used as WIL-based skills, covering a
+character’s knowledge.`,
+  description: `This includes those skills used to
+assimilate into a particular social setting.
+A single purchase of this skill represents
+a broad category of cultures, usually
+within a region such African Tribes,
+American Indian or perhaps
+Mediterranean. The Culture skill can be
+bought multiple times to represent
+different regions of the world or even
+from other Dominions.`,
+  suggestedFoci: `Customs, Etiquette,
+Protocol, Savoir-Faire (emulating social
+stratas)`
+},
+{
+  name: `Indoctrination`,
+  category: `Social`,
+  baseCost: `4`,
+  attribute: `Normally PRS-based but can be
+used as WIL-based skills, covering a
+character’s knowledge.`,
+  description: `This includes those skills used to obtain
+cooperation from an unwilling target.`,
+  suggestedFoci: `Brainwashing, Charm,
+Hypnotism, Interrogation, Intimidation,
+Propaganda, Taunt`
+},
+{
+  name: `Performance`,
+  category: `Social`,
+  baseCost: `4`,
+  attribute: `Normally PRS-based but can be
+used as WIL-based skills, covering a
+character’s knowledge.`,
+  description: `This includes those skills used to
+entertain individuals or groups`,
+  suggestedFoci: `Acting, Dancing,
+Disguise, Musical Instrumentation (by
+type), Singing, Voice Mimicry`
+},
+{
+  name: `Persuasion`,
+  category: `Social`,
+  baseCost: `4`,
+  attribute: `Normally PRS-based but can be
+used as WIL-based skills, covering a
+character’s knowledge.`,
+  description: `This includes those skills used to win
+someone over to the character’s
+viewpoint.`,
+  suggestedFoci: `Bargain, Debate,
+Doubletalk, Negotiate, Oration,
+Seduction`
+},
+]
+      //list js logic
+      var options = {
+  valueNames: [ 'name', 'category', 'baseCost', 'attribute', 'description', 'suggestedFoci'],
+  item: '<li><h3><span class="name"></span> (<span class="category"></span>) </h3><p><strong>Base Cost:</strong> <span class="baseCost"</span></p><p><strong>Attribute: </strong><span class="attribute"></span></p><p><strong>Description:</strong><span class="description"></p><p><strong>Suggested Foci:</strong> <span class="suggestedFoci"></span></p></li>'
+};
+
+var hackerList = new List('hacker-list', options, skills);
+</script>
