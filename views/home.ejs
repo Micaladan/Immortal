@@ -1,6 +1,15 @@
 <% layout("layouts/boilerplate")%>
     
 <style>
+    video{
+        object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+    }
     body{
         background-image: url('https://images.unsplash.com/photo-1484027224881-a91762262d8e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
         background-repeat: no-repeat;
@@ -18,4 +27,19 @@
 }
 
 </style>
-<h1>Immortal</h1>    
+
+
+<video id="myVideo" pre-load playsinline autoplay muted poster="https://player.vimeo.com/external/217438937.sd.mp4?s=80cde85ddca2b8e7a1c633a98a5680509e97f14f&amp;profile_id=164&amp;oauth2_token_id=57447761">
+        <source src="https://player.vimeo.com/external/217438937.sd.mp4?s=80cde85ddca2b8e7a1c633a98a5680509e97f14f&amp;profile_id=164&amp;oauth2_token_id=57447761" type="video/mp4">
+  </video>
+  <h1 id="videoEnd">Welcome to the Jungle</h1> 
+  <script>
+    document.getElementById('myVideo').addEventListener('ended',myHandler,false);
+   function myHandler(e) {
+       if(!e) { e = window.event; }
+       // What you want to do after the event
+       document.getElementById('myVideo').style.display="none";
+       document.getElementById('videoEnd').style.display="block";
+
+   }
+</script>
