@@ -15,7 +15,7 @@
   left: 0;
   z-index: 100000;
   background-color: black;
-  transition: 8s;
+  transition: 5s;
     }
     body{
         background-image: url('https://images.unsplash.com/photo-1484027224881-a91762262d8e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
@@ -44,7 +44,10 @@
        // What you want to do after the event
        document.getElementById('myVideo').style.opacity="0";
        document.getElementById('videoEnd').style.display="block";
-       document.getElementById('myVideo').style.display="none";
+       if(document.getElementById('myVideo').style.opacity === 0){
+        document.getElementById('myVideo').style.display="none";
+       }
+       
 
    }
 </script>
