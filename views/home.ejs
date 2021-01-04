@@ -38,16 +38,20 @@
 
   <h1 id="videoEnd">Welcome to the Jungle</h1> 
   <script>
+         function stateChange() {
+    setTimeout(function () {
+        document.getElementById('myVideo').style.display="none";
+    }, 4500);
+}
     document.getElementById('myVideo').addEventListener('ended',myHandler,false);
    function myHandler(e) {
        if(!e) { e = window.event; }
        // What you want to do after the event
+        stateChange();   
        document.getElementById('myVideo').style.opacity="0";
        document.getElementById('videoEnd').style.display="block";
-       if(document.getElementById('myVideo').style.opacity === 0){
-        document.getElementById('myVideo').style.display="none";
-       }
-       
-
+      
    }
+    
+       
 </script>
