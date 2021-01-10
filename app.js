@@ -8,6 +8,9 @@ const Note = require('./models/note');
 const Investigation = require('./models/investigation');
 const cors = require('cors');
 require('dotenv/config');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 // localhost 'mongodb://localhost:27017/immortal'
 mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
@@ -83,7 +86,14 @@ app.get('/investigations/new', (req, res) => {
 
 // Post people
 app.post('/people', async (req, res) => {
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: req.body.person.location,
+      limit: 1,
+    })
+    .send();
   const person = new Person(req.body.person);
+  person.geometry = geoData.body.features[0].geometry;
   await person.save();
   res.redirect(`/people/${person._id}`);
 });
@@ -136,10 +146,18 @@ app.get('/investigations/:id/edit', async (req, res) => {
 
 // update person id
 app.put('/people/:id', async (req, res) => {
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: req.body.person.location,
+      limit: 1,
+    })
+    .send();
   const { id } = req.params;
   const person = await Person.findByIdAndUpdate(id, {
     ...req.body.person,
   });
+  person.geometry = geoData.body.features[0].geometry;
+  await person.save();
   res.redirect(`/people/${person._id}`);
 });
 

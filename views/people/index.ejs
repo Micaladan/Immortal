@@ -1,4 +1,8 @@
 <% layout("layouts/boilerplate")%>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+
+<div id="map" style="width: 100%; height: 500px;"></div>
     <a href="/people/new" class="btn btn-success" style="float: right;">Add a New Person</a>
     <h1 class="row">All People</h1>
     <div class="row">   
@@ -20,3 +24,8 @@
             </div>
         <% }%>
     
+        <script>
+            const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
+            const people = {features: <%- JSON.stringify(people) %>}
+        </script>
+        <script src="/javascripts/clusterMap.js"></script>
