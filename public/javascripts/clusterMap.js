@@ -63,8 +63,8 @@ map.on('load', function () {
     filter: ['!', ['has', 'point_count']],
     paint: {
       'circle-color': '#11b4da',
-      'circle-radius': 4,
-      'circle-stroke-width': 1,
+      'circle-radius': 11,
+      'circle-stroke-width': 2,
       'circle-stroke-color': '#fff',
     },
   });
@@ -92,15 +92,17 @@ map.on('load', function () {
   // the location of the feature, with
   // description HTML from its properties.
   map.on('click', 'unclustered-point', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
-    var mag = e.features[0].properties.mag;
-    var tsunami;
+    const { popUpMarkup } = e.features[0].properties;
+    const coordinates = e.features[0].geometry.coordinates.slice();
 
-    if (e.features[0].properties.tsunami === 1) {
-      tsunami = 'yes';
-    } else {
-      tsunami = 'no';
-    }
+    // var mag = e.features[0].properties.mag;
+    // var tsunami;
+
+    // if (e.features[0].properties.tsunami === 1) {
+    //   tsunami = 'yes';
+    // } else {
+    //   tsunami = 'no';
+    // }
 
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the
@@ -109,10 +111,7 @@ map.on('load', function () {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    new mapboxgl.Popup()
-      .setLngLat(coordinates)
-      .setHTML('magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami)
-      .addTo(map);
+    new mapboxgl.Popup().setLngLat(coordinates).setHTML(popUpMarkup).addTo(map);
   });
 
   map.on('mouseenter', 'clusters', function () {
