@@ -1,42 +1,24 @@
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="/stylesheets/landing.css">
 <video id="myVideo" onclick="quickVideoEnd()" playsinline autoplay muted poster="https://desolate-atoll-68731.herokuapp.com/epicintro.mp4">
     <source src="https://desolate-atoll-68731.herokuapp.com/epicintro.mp4" type="video/mp4">
 </video>
 
-<% layout("layouts/boilerplate")%>
+<div class="container" id="videoEnd"></div>
+<div id="landing-header">
+    <h1><a class="entryLink" href="/people">Welcome to the Jungle</a></h1>
+    <a class="entryLink" href="/people">Check out the People of Immortal</a>
+</div>
+<ul class="slideshow">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
 
-<style>
-    video{
-        object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100000;
-  background-color: black;
-  transition: 5s;
-    }
-    body{
-        background-image: url('https://images.unsplash.com/photo-1484027224881-a91762262d8e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    h1{
-        color: #BBB;
-    }
-    
-    @media (max-width: 600px) {
-    body {
-        background-image: url('https://images.unsplash.com/photo-1484027224881-a91762262d8e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
-        background-position-x: -17rem;
-    }
-}
+  <div class="container"></div>
 
-</style>
-
-
-  <h1 id="videoEnd">Welcome to the Jungle</h1> 
   <script>
       function quickVideoEnd() {
         setTimeout(function () {

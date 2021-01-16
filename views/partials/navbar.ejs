@@ -14,6 +14,14 @@
           <a href="/serenades" class="nav-link">Serenades</a>
           <a href="/skills" class="nav-link">Skills</a>
         </div>
+        <div class="navbar-nav ml-auto">
+          <% if(2 === 2){ %>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/register">Register</a>
+          <% } else{ %>
+            <a class="nav-link" href="/logout">Logout</a>
+          <% } %>
+        </div>
       </div>
     </div>
   </nav>
