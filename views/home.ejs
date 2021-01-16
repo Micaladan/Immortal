@@ -1,5 +1,5 @@
 
-<video id ="myVideo" playsinline autoplay muted poster="https://desolate-atoll-68731.herokuapp.com/epicintro.mp4">
+<video id="myVideo" onclick="endVideo()" playsinline autoplay muted poster="https://desolate-atoll-68731.herokuapp.com/epicintro.mp4">
     <source src="https://desolate-atoll-68731.herokuapp.com/epicintro.mp4" type="video/mp4">
 </video>
 
@@ -38,7 +38,12 @@
 
   <h1 id="videoEnd">Welcome to the Jungle</h1> 
   <script>
-         function stateChange() {
+      function endVideo() {
+        document.getElementById('myVideo').style.opacity="0";
+       document.getElementById('videoEnd').style.display="block";
+      }
+      
+      function stateChange() {
     setTimeout(function () {
         document.getElementById('myVideo').style.display="none";
     }, 4500);
@@ -48,9 +53,7 @@
        if(!e) { e = window.event; }
        // What you want to do after the event
         stateChange();   
-       document.getElementById('myVideo').style.opacity="0";
-       document.getElementById('videoEnd').style.display="block";
-      
+        endVideo();
    }
     
        
