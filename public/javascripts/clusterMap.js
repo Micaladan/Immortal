@@ -1,10 +1,24 @@
 mapboxgl.accessToken = mapToken;
-var map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/dark-v10',
-  center: [-50, 40.66995747013945],
-  zoom: 2,
+  center: [-84.5125, 39.2015],
+  zoom: 9,
 });
+
+const marker = new mapboxgl.Marker()
+  .setLngLat([-84.511027, 39.100662])
+  .setPopup(
+    new mapboxgl.Popup().setHTML(
+      '<h3>Mercantile Library</h3><p><a href="https://desolate-atoll-68731.herokuapp.com/people/5fb5549cce40b100177a1df3">Jessica Duncan</a></p><p><a href="https://desolate-atoll-68731.herokuapp.com/people/5fb5552cce40b100177a1df6">Reginald Osiris</a></p><p><a href="https://desolate-atoll-68731.herokuapp.com/people/5fb554fcce40b100177a1df5">Jane Branigan</a></p><p><a href="https://desolate-atoll-68731.herokuapp.com/people/5fb55556ce40b100177a1df7">Parking Lot Victim</a></p>'
+    )
+  )
+  .addTo(map);
+
+var nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-right');
+
+console.log(marker.getPopup()); // return the popup instance
 
 map.on('load', function () {
   // Add a new source from our GeoJSON data and
@@ -107,6 +121,7 @@ map.on('load', function () {
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the
     // popup appears over the copy being pointed to.
+
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
