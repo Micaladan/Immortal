@@ -1,13 +1,19 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 const Person = require('./models/person');
 const Note = require('./models/note');
 const Investigation = require('./models/investigation');
 const cors = require('cors');
 require('dotenv/config');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+const userRoutes = require('./routes/users');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
@@ -35,6 +41,43 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(cors());
 app.use(express.static('public'));
+
+const sessionConfig = {
+  secret: 'thisshouldbeabettersecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+app.use(session(sessionConfig));
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+
+//Auth
+// app.get('/fakeUser', async (req, res) => {
+//   const user = new User({ email: 'colttt@gmail.com', username: 'colttt' });
+//   const newUser = await User.register(user, 'chicken');
+//   res.send(newUser);
+// });
+
+app.use('/', userRoutes);
+app;
 
 app.get('/', (req, res) => {
   res.render('home');
