@@ -127,6 +127,10 @@ app.get('/investigations/new', (req, res) => {
   res.render('investigations/new');
 });
 
+// Get Point Allocations page
+app.get('/points', (req, res) => {
+  res.render('points');
+});
 // Post people
 app.post('/people', async (req, res) => {
   const geoData = await geocoder
