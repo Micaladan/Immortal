@@ -1,0 +1,33 @@
+<% layout("layouts/boilerplate")%>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+
+<!-- <div id="map-background">
+    <div id="dndmap" style="width: 100%; height: 500px; " ></div>
+</div> -->
+    <a href="/dndpeople/new" class="btn btn-success" style="float: right;">Add a New DND Person</a>
+    <h1 class="row">All DND People</h1>
+    <div class="row">   
+        <% for(let dndperson of dndpeople) {%>
+            <div class="card mb-3 col-lg-3">
+                <div class="col">
+                    <div class="col-md-4">
+                        <img class="img-fluid" style="max-width: 128px" src="<%= dndperson.image %>" alt="">
+                    </div>
+                    <div class="card-body col-md-8">
+                        <h5 class="card-title"><%= dndperson.name %></h5>
+                        <p class="card-text text-truncate"><%= dndperson.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= dndperson.location %></small>
+                        </p>
+                        <a href="/dndpeople/<%= dndperson._id %>" class="btn btn-primary">View <%= dndperson.name %></a>
+                    </div>
+                </div>
+            </div>
+        <% }%>
+    
+        <script>
+            const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
+            const dndpeople = {features: <%- JSON.stringify(dndpeople) %>}
+        </script>
+        <script src="/javascripts/dndClusterMap.js"></script>

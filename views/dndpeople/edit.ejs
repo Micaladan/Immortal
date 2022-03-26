@@ -1,0 +1,34 @@
+<% layout("layouts/boilerplate")%>
+
+    <div class="row">
+        <h1 class="text-center">Edit DND Person</h1>
+        <div class="col-6 offset-3">
+            <form action="/dndpeople/<%= dndperson._id %>?_method=PUT" method="POST">
+                <div>
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control mb-3" type="text" id="name" name="dndperson[name]" value="<%= dndperson.name %>"> 
+                </div>
+                <div>
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control mb-3" type="text" id="location" name="dndperson[location]" value="<%= dndperson.location %>"> 
+                </div>
+                <div>
+                    <label class="form-label" for="image">Image URL</label>
+                    <input class="form-control mb-3" type="text" id="image" name="dndperson[image]" value="<%= dndperson.image %>"> 
+                </div>
+               
+                <div>
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control mb-3" type="text" id="description" name="dndperson[description]"><%= dndperson.description %></textarea> 
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update DND Person</button>
+                </div>
+              
+            </form>
+            <div>
+            <a href="/dndpeople/<%= dndperson._id %>">Back to DND Person</a>
+            </div>
+        
+        </div>
+    </div>

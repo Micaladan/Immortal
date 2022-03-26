@@ -6,6 +6,7 @@ const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const Person = require('./models/person');
+const DndPerson = require('./models/dndperson');
 const Note = require('./models/note');
 const Investigation = require('./models/investigation');
 const cors = require('cors');
@@ -89,6 +90,12 @@ app.get('/people', async (req, res) => {
   res.render('people/index', { people });
 });
 
+//Get index Route for DndPeople
+app.get('/dndpeople', async (req, res) => {
+  const dndpeople = await DndPerson.find({});
+  res.render('dndpeople/index', { dndpeople });
+});
+
 //Get index Route for Notes
 app.get('/notes', async (req, res) => {
   const notes = await Note.find({});
@@ -115,6 +122,11 @@ app.get('/skills', (req, res) => {
 // Get new Person form
 app.get('/people/new', (req, res) => {
   res.render('people/new');
+});
+
+// Get new Person form
+app.get('/dndpeople/new', (req, res) => {
+  res.render('dndpeople/new');
 });
 
 // Get new Note form
@@ -145,6 +157,20 @@ app.post('/people', async (req, res) => {
   res.redirect(`/people/${person._id}`);
 });
 
+// Post dnd people
+app.post('/dndpeople', async (req, res) => {
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: req.body.dndperson.location,
+      limit: 1,
+    })
+    .send();
+  const dndperson = new DndPerson(req.body.dndperson);
+  dndperson.geometry = geoData.body.features[0].geometry || {};
+  await dndperson.save();
+  res.redirect(`/dndpeople/${dndperson._id}`);
+});
+
 //Post Notes
 app.post('/notes', async (req, res) => {
   const note = new Note(req.body.note);
@@ -163,6 +189,12 @@ app.get('/people/:id', async (req, res) => {
   res.render('people/show', { person });
 });
 
+// Get person by id
+app.get('/dndpeople/:id', async (req, res) => {
+  const dndperson = await DndPerson.findById(req.params.id);
+  res.render('dndpeople/show', { dndperson });
+});
+
 //Get note by id
 app.get('/notes/:id', async (req, res) => {
   const note = await Note.findById(req.params.id);
@@ -178,6 +210,12 @@ app.get('/investigations/:id', async (req, res) => {
 app.get('/people/:id/edit', async (req, res) => {
   const person = await Person.findById(req.params.id);
   res.render('people/edit', { person });
+});
+
+//Get DND Person by id and show edit form
+app.get('/dndpeople/:id/edit', async (req, res) => {
+  const dndperson = await DndPerson.findById(req.params.id);
+  res.render('dndpeople/edit', { dndperson });
 });
 
 //Get note by id and show edit form
@@ -208,6 +246,24 @@ app.put('/people/:id', async (req, res) => {
   res.redirect(`/people/${person._id}`);
 });
 
+// update dndperson id
+app.put('/dndpeople/:id', async (req, res) => {
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: req.body.dndperson.location,
+      limit: 1,
+    })
+    .send();
+  const { id } = req.params;
+  const dndperson = await DndPerson.findByIdAndUpdate(id, {
+    ...req.body.dndperson,
+  });
+  dndperson.geometry = geoData.body.features[0].geometry || {};
+  await dndperson.save();
+  console.log(dndperson);
+  res.redirect(`/dndpeople/${dndperson._id}`);
+});
+
 //update note id
 app.put('/notes/:id', async (req, res) => {
   const { id } = req.params;
@@ -231,6 +287,13 @@ app.delete('/people/:id/', async (req, res) => {
   await Person.findByIdAndDelete(id);
   res.redirect('/people');
 });
+//delete dnd person id
+app.delete('/dndpeople/:id/', async (req, res) => {
+  const { id } = req.params;
+  await DndPerson.findByIdAndDelete(id);
+  res.redirect('/dndpeople');
+});
+
 //delete note id
 app.delete('/notes/:id/', async (req, res) => {
   const { id } = req.params;
